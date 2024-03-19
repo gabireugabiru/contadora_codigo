@@ -88,8 +88,7 @@ void reset_state() {
 void setup() {
   Serial.begin(9600);
   for (int i = 0; i < HOW_MANY; i++) {
-    // count[i] = EEPROM.read(i);
-    count[i] = 255;
+    count[i] = EEPROM.read(i);
     pinMode(pins[i], INPUT);
   }
   pinMode(BUTTON_PIN, INPUT_PULLUP);
@@ -111,7 +110,7 @@ void loop() {
           count[i] += 1;
         }
         last[i] = x;
-        // EEPROM.update(i, count[i]);
+        EEPROM.update(i, count[i]);
 
         //left number padding
         if (count[i] < 10) {
@@ -161,7 +160,7 @@ void loop() {
         for (int i = 0; i < HOW_MANY; i++) {
           count[i] = 0;
           last[i] = 0;
-          // EEPROM.update(i, 0);
+          EEPROM.update(i, 0);
         }
       }
       reset_state();
